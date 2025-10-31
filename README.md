@@ -1,12 +1,10 @@
 A/B Testing + CUPED + Retention Analytics + Churn Modeling (Real Dataset: Cookie Cats)
 
 **Business Problem**
-Modern product teams run thousands of experiments annually.
-This lab mimics a real product rollout decision:
 
-Should we launch Variant B or keep Variant A?
-
-We evaluate based on:
+    Modern product teams run thousands of experiments annually.  
+    This lab mimics a real product rollout decision:
+    Should we launch Variant B or keep Variant A?
 
     Conversion lift
     Retention guardrails
@@ -32,4 +30,11 @@ It demonstrates how to run rigorous tests, reduce variance, analyze retention, a
     Data Sources         Synthetic users + Cookie Cats real dataset
     Outputs              Product insights, lift estimates, PM-ready summary
 
+**Example Results**
+
+    Variant B improved conversion by ~+2.27pp (significant)
+    CTR up ~5pp
+    No retention drop
+    Churn model AUC ~0.80–0.90 (realistic thresholding & balancing)
+    Recommendation: Scale Variant B while monitoring guardrails (latency, retention dips, complaints).
 
