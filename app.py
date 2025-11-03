@@ -11,9 +11,8 @@ import plotly.express as px
 import plotly.graph_objects as go
 import io
 
-# =========================
 # Synthetic data generator
-# =========================
+
 @dataclass
 class SimConfig:
     n_users: int = 50000
@@ -84,9 +83,9 @@ def simulate_data(cfg: SimConfig) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFr
     retention["active"] = np.where(retention.get("total_users",0).eq(0), 0, retention["active_users"]/retention["total_users"])
     return users, sessions, retention[["variant","day","active"]].copy()
 
-# ===============
+
 # Helper metrics
-# ===============
+
 def ab_summary(users: pd.DataFrame) -> pd.DataFrame:
     grp = users.groupby("variant", as_index=False).agg(
         n_users=("user_id", "count"),
@@ -144,9 +143,9 @@ def funnel_plot(users: pd.DataFrame) -> go.Figure:
     fdf = pd.DataFrame(rows)
     return px.funnel(fdf, x="pct", y="stage", color="variant", title="Funnel Conversion (%)")
 
-# ======================
+
 # Real data: CookieCats
-# ======================
+# =====================
 def load_cookie_cats_csv(file_obj: io.BytesIO) -> Tuple[pd.DataFrame, Optional[str]]:
     """
     Expected columns: userid, version (gate_30/gate_40), sum_gamerounds, retention_1, retention_7
@@ -187,9 +186,9 @@ def load_cookie_cats_csv(file_obj: io.BytesIO) -> Tuple[pd.DataFrame, Optional[s
     users["retention_7"] = df["retention_7"].astype(int)
     return users, None
 
-# ======================
+
 # Churn modeling (real/synth)
-# ======================
+# =====================
 def build_churn_labels_real_cookie(users: pd.DataFrame) -> pd.Series:
     # Define churn as not retained on day 7
     y = (1 - users["retention_7"]).astype(int)
